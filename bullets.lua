@@ -36,11 +36,10 @@ local bullets = {
                     table.remove(lb, i)
                     table.remove(rb, j)
                     blm = (blm^2 + 1)^0.5
-                    goto done
+                    break
                 end
             end
         end
-        ::done::
         bvm = (time / 2.5)^0.5
     end
 }
