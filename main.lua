@@ -11,6 +11,7 @@ end
 function love.load()
     require "values"
     bullets = require "bullets"
+    draw = require "draw"
     time = 0 -- Time since start
     bullets.reset()
     love.window.setMode(w, h)
@@ -40,12 +41,15 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setColor(lcol)
     for k, v in pairs(lb) do
-        love.graphics.polygon("fill", v.d + 60, v.h * 100, v.d + 40, v.h * 100 - 10, v.d + 40, v.h * 100 + 10)
+        love.graphics.origin()
+        love.graphics.translate(v.d + 50, v.h * 100)
+        draw.bullet(lcol)
     end
-    love.graphics.setColor(rcol)
     for k, v in pairs(rb) do
-        love.graphics.polygon("fill", w - (v.d + 60), v.h * 100, w -(v.d + 40), v.h * 100 - 10, w - (v.d + 40), v.h * 100 + 10)
+        love.graphics.origin()
+        love.graphics.translate(w - 50 - v.d, v.h * 100)
+        love.graphics.scale(-1, 1)
+        draw.bullet(rcol)
     end
 end
