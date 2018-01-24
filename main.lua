@@ -9,22 +9,17 @@ function win(s) -- Announces win?
     else
         -- Right wins
     end
-    time = 0
+    time = 0 -- Reset game
     bv = 200
     blim = 2
     lb, rb = {}, {}
 end
 
 function love.load()
-    w, h = 1000, 400 -- Size of window
+    require "values"
     time = 0 -- Time since start
-    bv = 200 -- Bullet velocity
-    blim = 2 -- Bullet limit
-    maxd = 900 -- Win condition
     lb = {} -- Left bullets
     rb = {} -- Right bullets
-    lcol = {200, 70, 230} -- Left player colour
-    rcol = {70, 230, 200} -- Right player colour
     love.window.setMode(w, h)
 end
 
@@ -55,7 +50,7 @@ function love.update(dt)
         end
     end
 
-    for k, v in pairs(rb) do -- Updade right player bullets
+    for k, v in pairs(rb) do -- Update right player bullets
         v.d = v.d + bv * dt
         if v.d > maxd then
             win("r")
