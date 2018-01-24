@@ -10,8 +10,8 @@ function win(s) -- Announces win?
         -- Right wins
     end
     time = 0 -- Reset game
-    bv = 200
-    blim = 2
+    bvm = 1
+    blm = 1
     lb, rb = {}, {}
 end
 
@@ -20,22 +20,24 @@ function love.load()
     time = 0 -- Time since start
     lb = {} -- Left bullets
     rb = {} -- Right bullets
+    bvm = 1 -- Bullet velocity multiplier
+    blm = 1 -- Bullet limit multiplier
     love.window.setMode(w, h)
 end
 
 function love.keypressed(key, scancode, isrepeat)
     if not isrepeat then
-        if scancode == "z" and #lb < blim then
+        if scancode == "z" and #lb < blim * blm then
             lb[#lb + 1] = bullet(1, 0)
-        elseif scancode == "x" and #lb < blim then
+        elseif scancode == "x" and #lb < blim * blm then
             lb[#lb + 1] = bullet(2, 0)
-        elseif scancode == "c" and #lb < blim then
+        elseif scancode == "c" and #lb < blim * blm then
             lb[#lb + 1] = bullet(3, 0)
-        elseif scancode == "," and #rb < blim then
+        elseif scancode == "," and #rb < blim * blm then
             rb[#rb + 1] = bullet(1, 0)
-        elseif scancode == "." and #rb < blim then
+        elseif scancode == "." and #rb < blim * blm then
             rb[#rb + 1] = bullet(2, 0)
-        elseif scancode == "/" and #rb < blim then
+        elseif scancode == "/" and #rb < blim * blm then
             rb[#rb + 1] = bullet(3, 0)
         end
     end
@@ -44,14 +46,14 @@ end
 function love.update(dt)
     time = time + dt -- Update timer
     for k, v in pairs(lb) do -- Update left player bullets
-        v.d = v.d + bv * dt
+        v.d = v.d + bv * bvm * dt
         if v.d > maxd then
             win("l")
         end
     end
 
     for k, v in pairs(rb) do -- Update right player bullets
-        v.d = v.d + bv * dt
+        v.d = v.d + bv * bvm * dt
         if v.d > maxd then
             win("r")
         end
@@ -62,8 +64,8 @@ function love.update(dt)
             if lb[i].h == rb[j].h and lb[i].d > maxd - rb[j].d then
                 table.remove(lb, i)
                 table.remove(rb, j)
-                bv = bv * 1.02
-                blim = (blim^2 + 1)^0.5
+                bvm = bvm * 1.02
+                blm = (blm^2 + 1)^0.5
                 goto done
             end
         end
