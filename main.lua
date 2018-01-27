@@ -1,19 +1,23 @@
-function win(s) -- Announces win?
-    if s == "l" then
-        -- Left wins
-    else
-        -- Right wins
-    end
+function win(side) -- Announces win?
     time = 0 -- Reset game
     bullets.reset()
+    particles.reset()
+    if side == "l" then
+        particles.ekusuploshun(rcol) -- Left wins
+    else
+        particles.ekusuploshun(lcol) -- Right wins
+    end
 end
 
 function love.load()
     require "values"
     bullets = require "bullets"
+    particles = require "particles"
+    ptypes = require "ptypes"
     draw = require "draw"
     time = 0 -- Time since start
     bullets.reset()
+    particles.reset()
     love.window.setMode(w, h)
 end
 
@@ -38,18 +42,12 @@ end
 function love.update(dt)
     time = time + dt -- Update timer
     bullets.update(dt)
+    particles.update(dt)
 end
 
 function love.draw()
-    for k, v in pairs(lb) do
-        love.graphics.origin()
-        love.graphics.translate(v.d + 50, v.h * 100)
-        draw.bullet(lcol)
-    end
-    for k, v in pairs(rb) do
-        love.graphics.origin()
-        love.graphics.translate(w - 50 - v.d, v.h * 100)
-        love.graphics.scale(-1, 1)
-        draw.bullet(rcol)
-    end
+    love.graphics.origin()
+    love.graphics.setBlendMode("add")
+    bullets.draw()
+    particles.draw()
 end

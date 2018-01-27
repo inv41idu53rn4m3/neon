@@ -41,6 +41,22 @@ local bullets = {
             end
         end
         bvm = (time / 2.5)^0.5
+    end,
+
+    draw = function ()
+        for k, v in pairs(lb) do
+            love.graphics.push()
+            love.graphics.translate(v.d + 50, v.h * 100)
+            draw.bullet(lcol)
+            love.graphics.pop()
+        end
+        for k, v in pairs(rb) do
+            love.graphics.push()
+            love.graphics.translate(w - 50 - v.d, v.h * 100)
+            love.graphics.scale(-1, 1)
+            draw.bullet(rcol)
+            love.graphics.pop()
+        end
     end
 }
 
