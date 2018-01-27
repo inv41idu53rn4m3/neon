@@ -3,9 +3,9 @@ function win(side) -- Announces win?
     bullets.reset()
     particles.reset()
     if side == "l" then
-        particles.ekusuploshun(rcol) -- Left wins
+        particles.ekusuploshun(rcol[1], rcol[2], rcol[3]) -- Left wins
     else
-        particles.ekusuploshun(lcol) -- Right wins
+        particles.ekusuploshun(lcol[1], lcol[2], lcol[3]) -- Right wins
     end
 end
 

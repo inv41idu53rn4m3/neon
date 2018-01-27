@@ -7,7 +7,6 @@ draw = {
     end,
     particle = function (p)
         love.graphics.setColor(p.c[1], p.c[2], p.c[3], p.c[4])
-        print(p.c[4])
         love.graphics.draw(ptypes[p.t].tex, 0, 0, p.a)
     end
 }
