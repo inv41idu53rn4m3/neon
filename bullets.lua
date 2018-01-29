@@ -33,6 +33,7 @@ local bullets = {
         for i = #lb, 1, -1 do -- Remove collided bullets
             for j = #rb, 1, -1 do
                 if lb[i].h == rb[j].h and lb[i].d > maxd - rb[j].d then
+                    particles.explosion(lb[i].d + 50, lb[i].h * 100, 30 + (time * 10)^0.5, "bigboom", 255, 255, 255, 200)
                     table.remove(lb, i)
                     table.remove(rb, j)
                     blm = (blm^2 + 1)^0.5
