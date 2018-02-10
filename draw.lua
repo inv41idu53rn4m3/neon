@@ -7,7 +7,7 @@ draw = {
     end,
     particle = function (p)
         love.graphics.setColor(p.c[1], p.c[2], p.c[3], p.c[4])
-        love.graphics.draw(ptypes[p.t].tex, -ptypes[p.t].tex:getWidth() / 2, -ptypes[p.t].tex:getHeight() / 2, p.a, 1, 1, ptypes[p.t].tex:getWidth() / 2, ptypes[p.t].tex:getHeight() / 2)
+        love.graphics.draw(ptypes[p.t].tex, 0, 0, p.a, 1, 1, ptypes[p.t].tex:getWidth() / 2, ptypes[p.t].tex:getHeight() / 2)
     end
 }
 
